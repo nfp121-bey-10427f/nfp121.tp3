@@ -5,6 +5,7 @@ import question1.PilePleineException;
 import question1.PileVideException;
 
 import java.util.Vector;
+import java.util.Arrays;
 
 /**
  * Décrivez votre classe PileVector ici.
@@ -78,12 +79,23 @@ public class Pile3 implements PileI {
 	}
 
 	public boolean equals(Object o) {
-	 if(! (o instanceof PileI) ) return false;
-        PileI op = (PileI)o;
-        if(op.taille() != this.taille()) return false;
-        if(op.capacite() != this.capacite()) return false;
-        
-        return op.toString().equals(this.toString());
+	 if (o == null)
+			return false;
+		if (o == this)
+			return true;
+		if (!(o instanceof Pile3))
+			return false;
+
+		Pile3 p = (Pile3) o;
+		if (p.taille() != this.taille())
+			return false;
+		if (p.capacite() != this.capacite)
+			return false;
+
+		Object[] tab = p.v.toArray();
+		Object[] tab2 = this.v.toArray();
+
+		return Arrays.asList(tab).containsAll(Arrays.asList(tab2));
 	}
 
 	// fonction fournie

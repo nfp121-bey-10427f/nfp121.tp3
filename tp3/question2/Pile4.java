@@ -4,6 +4,7 @@ import question1.PilePleineException;
 import question1.PileVideException;
 
 import java.util.Stack;
+import java.util.Arrays;
 
 public class Pile4 implements PileI, Cloneable {
     /** la liste des Maillons/Elements */
@@ -181,20 +182,41 @@ public class Pile4 implements PileI, Cloneable {
     }
 
     public boolean equals(Object o) {
-        if (o instanceof Pile4) {
-           
-           Pile4 op = (Pile4) o;
-           if(op.taille()!= this.taille() || op.capacite() != this.capacite())
-           return false;
-           
-           else
-           {
-              return this.toString().equals(o.toString());
-               
-            }
-           
-        }
-        return false;
+       if (o == null)
+			return false;
+		if (o == this)
+			return true;
+		if (!(o instanceof Pile4))
+			return false;
+
+		Pile4 p = (Pile4) o;
+		if (p.taille() != this.taille())
+			return false;
+		if (p.capacite() != this.capacite())
+			return false;
+
+		Object[] tab = new Object[p.taille()];
+
+		Maillon m = p.stk;
+		int i = 0;
+		while (i < tab.length) {
+			tab[i] = m.element;
+			i++;
+			m = m.suivant;
+		}
+
+		Object[] tab2 = new Object[this.taille()];
+		Maillon m2 = this.stk;
+
+		int j = 0;
+		while (j < tab2.length) {
+			tab2[j] = m2.element;
+			j++;
+			m2 = m2.suivant;
+
+		}
+
+		return (Arrays.asList(tab).containsAll(Arrays.asList(tab2)));
     }
 
     public int capacite() {

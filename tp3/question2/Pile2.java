@@ -3,6 +3,7 @@ package question2;
 import question1.PilePleineException;
 import question1.PileVideException;
 
+import java.util.Arrays;
 import java.util.Stack;
 import java.util.ListIterator;
 
@@ -98,12 +99,26 @@ public class Pile2 implements PileI {
     }
 
     public boolean equals(Object o) {
-         if(! (o instanceof PileI) ) return false;
-        PileI op = (PileI)o;
-        if(op.taille() != this.taille()) return false;
-        if(op.capacite() != this.capacite()) return false;
-        
-        return op.toString().equals(this.toString());
+        if (o == null)
+			return false;
+		if (o == this)
+			return true;
+
+		if (!(o instanceof Pile2))
+			return false;
+
+		Pile2 p = (Pile2) o;
+
+		if (p.taille() != this.taille())
+			return false;
+		if (p.capacite() != this.capacite)
+			return false;
+
+		Object[] tab = p.stk.toArray();
+
+		Object[] tab2 = this.stk.toArray();
+
+		return Arrays.asList(tab).containsAll(Arrays.asList(tab2));
     }
 
     // fonction fournie

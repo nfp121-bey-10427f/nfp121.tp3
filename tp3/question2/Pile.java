@@ -2,6 +2,7 @@ package question2;
 
 import question1.PilePleineException;
 import question1.PileVideException;
+import java.util.Arrays;
 
 /**
  * A remplacer en partie par votre classe Pile de la question 1.
@@ -60,12 +61,21 @@ public class Pile implements PileI {
     }
 
     public boolean equals(Object o) {
-        if(! (o instanceof PileI) ) return false;
-        PileI op = (PileI)o;
-        if(op.taille() != this.taille()) return false;
-        if(op.capacite() != this.capacite()) return false;
+       
+        if(o == null) return false;
+        if(o == this) return true;
+        if(! (o instanceof Pile)) return false;
         
-        return op.toString().equals(o.toString());
+        Pile p = (Pile)o;
+        if(p.taille() != this.taille()) return false;
+        if(p.capacite() != this.capacite()) return false;
+        
+        Object[] tab1 = p.zone;
+        Object[] tab2 = this.zone;
+        
+        return (Arrays.asList(tab1).containsAll(Arrays.asList(tab2)));
+        
+       
     }
 
     // fonction fournie

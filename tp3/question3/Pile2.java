@@ -4,6 +4,7 @@ import question1.PilePleineException;
 import question1.PileVideException;
 
 import java.util.Stack;
+import java.util.Arrays;
 
 public class Pile2<T> implements PileI<T>{
     /** par délégation : utilisation de la class Stack */
@@ -55,16 +56,26 @@ public class Pile2<T> implements PileI<T>{
     
     public boolean equals(Object o)
     {
-        if(o  ==null) return false;
-        if(o == this) return true;
-        if(o instanceof PileI)
-        {
-            
-            Pile2<T> op =  (Pile2<T>) o;
-            return op.toString().equals(this.toString());
-        }
-        
-        return false;
+          if (o == null)
+			return false;
+		if (o == this)
+			return true;
+
+		if (!(o instanceof Pile2))
+			return false;
+
+		Pile2 p = (Pile2) o;
+
+		if (p.taille() != this.taille())
+			return false;
+		if (p.capacite() != this.capacite)
+			return false;
+
+		Object[] tab = p.stk.toArray();
+
+		Object[] tab2 = this.stk.toArray();
+
+		return Arrays.asList(tab).containsAll(Arrays.asList(tab2));
     }
     
     public boolean estVide()
